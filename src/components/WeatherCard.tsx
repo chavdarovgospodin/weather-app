@@ -17,7 +17,9 @@ import { useTheme } from '@mui/material/styles';
 import { WeatherData } from './WeatherList';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const WeatherCard = (weatherData: WeatherData, isTimeShown = true) => {
+import './styles.css';
+
+const WeatherCard = (weatherData: WeatherData) => {
   const {
     date,
     description,
@@ -55,32 +57,24 @@ const WeatherCard = (weatherData: WeatherData, isTimeShown = true) => {
       onClick={handleTitleClick}
     >
       <Grid item>
-        <Typography sx={{ fontSize: 20 }}>
-          <Box component="span" sx={{ display: 'block' }}>
+        <Typography className="Header-title">
+          <Box component="span" className="Header-title-date">
             {weekDay}
           </Box>
-          <Box component="span" sx={{ display: 'block' }}>
+          <Box component="span" className="Header-title-date">
             {formattedDate}
           </Box>
-          {isTimeShown && (
-            <Box component="span" sx={{ display: 'block' }}>
-              {formattedTime}
-            </Box>
-          )}
+          <Box component="span" className="Header-title-date">
+            {formattedTime}
+          </Box>
         </Typography>
       </Grid>
 
       <Grid item sx={{ display: 'flex' }}>
-        <Box
-          component="span"
-          sx={{ display: 'block', fontSize: 24, fontWeight: 'bold' }}
-        >
+        <Box component="span" className="Temp-max">
           {temp_max}
         </Box>
-        <Box
-          component="span"
-          sx={{ fontSize: 14, pt: '10px', pl: 0.5, color: 'gray' }}
-        >
+        <Box component="span" className="Temp-min">
           /{temp_min} {`${units === 'metric' ? '°C' : '°F'}`}
         </Box>
       </Grid>
@@ -99,10 +93,7 @@ const WeatherCard = (weatherData: WeatherData, isTimeShown = true) => {
           avatar={<ImageList searchString={icon} />}
         />
         <CardContent sx={{ pt: 0 }}>
-          <Typography
-            sx={{ fontSize: 24, fontWeight: 'bold', pb: 2 }}
-            color="text.secondary"
-          >
+          <Typography className="Description" color="text.secondary">
             {description.charAt(0).toUpperCase() + description.slice(1)}
           </Typography>
           <Box
@@ -116,65 +107,28 @@ const WeatherCard = (weatherData: WeatherData, isTimeShown = true) => {
               },
             }}
           >
-            <Box
-              gridColumn="span 6"
-              sx={{
-                fontSize: 16,
-                display: 'flex',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid rgba(0,0,0,.15)',
-                borderTopLeftRadius: '2px',
-                borderTopRightRadius: '2px',
-              }}
-            >
+            <Box gridColumn="span 6" className="Temp">
               <Typography color="text.secondary">Temp</Typography>
               <Typography
                 sx={{ fontWeight: 'bold' }}
                 color="text.secondary"
               >{`${temp} ${units === 'metric' ? '°C' : '°F'}`}</Typography>
             </Box>
-            <Box
-              gridColumn="span 6"
-              sx={{
-                fontSize: 16,
-                p: 0.5,
-                display: 'flex',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid rgba(0,0,0,.15)',
-                borderTopLeftRadius: '2px',
-                borderTopRightRadius: '2px',
-              }}
-            >
+            <Box gridColumn="span 6" className="Feels-like">
               <Typography color="text.secondary">Feels like</Typography>
               <Typography sx={{ fontWeight: 'bold' }} color="text.secondary">
                 {feels_like}
                 {`${units === 'metric' ? '°C' : '°F'}`}
               </Typography>
             </Box>
-            <Box
-              gridColumn="span 6"
-              sx={{
-                fontSize: 16,
-                p: 0.5,
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
+            <Box gridColumn="span 6" className="Wind">
               <Typography color="text.secondary">Wind</Typography>
               <Typography color="text.secondary" sx={{ fontWeight: 'bold' }}>
                 {degreesToDirection(windDeg) + ' ' + windSpeed}
                 {units === 'metric' ? ' meter/sec' : ' miles/hour'}
               </Typography>
             </Box>
-            <Box
-              gridColumn="span 6"
-              sx={{
-                fontSize: 16,
-                display: 'flex',
-                p: 0.5,
-                justifyContent: 'space-between',
-              }}
-            >
+            <Box gridColumn="span 6" className="Pressure">
               <Typography color="text.secondary">Pressure</Typography>
               <Typography sx={{ fontWeight: 'bold' }} color="text.secondary">
                 {pressure} hPa
