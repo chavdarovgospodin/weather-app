@@ -9,15 +9,15 @@ const ImageList = ({ searchString }: any) => {
   };
 
   const images = importAll(
-    require.context('../../assets/weather-icons', false, /\.(png)$/),
+    require.context('../../assets/weather-icons', false, /\.(png)$/)
   );
 
   const filteredImages = images.filter((image: any) =>
-    image.fileName.includes(searchString),
+    image.fileName.includes(searchString)
   );
 
   return filteredImages.map((image: any, index: number) => (
-    <img key={index} src={image.src} />
+    <img key={index} src={image.src} alt="weather" />
   ));
 };
 

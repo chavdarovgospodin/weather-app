@@ -27,7 +27,10 @@ export const degreesToDirection = (degrees: number) => {
   return directions[index];
 };
 
-export const getAverageValues = (currentWeather: any, fiveDaysWeather: any) => {
+export const tranformWeatherValues = (
+  currentWeather: any,
+  fiveDaysWeather: any
+) => {
   const today = new Date();
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -86,10 +89,11 @@ export const getAverageValues = (currentWeather: any, fiveDaysWeather: any) => {
           accumulator.windDegTotal += item.wind.deg;
 
           const description = item.weather[0].description;
-          const icon = item.weather[0].icon;
+          const icon = item.weather[0].icon.slice(0, -1);
+
           accumulator.descriptions[description] =
             (accumulator.descriptions[description] || 0) + 1;
-          accumulator.icons[icon] = (accumulator.icons[icon] || 0) + 1;
+          accumulator.icons[description] = icon;
 
           return accumulator;
         },
@@ -104,7 +108,7 @@ export const getAverageValues = (currentWeather: any, fiveDaysWeather: any) => {
           humidityTotal: 0,
           descriptions: {},
           icons: {},
-        },
+        }
       );
 
       const mostUsedDescription = Object.keys(total.descriptions).reduce(
@@ -112,14 +116,7 @@ export const getAverageValues = (currentWeather: any, fiveDaysWeather: any) => {
           return total.descriptions[currKey] > total.descriptions[prevKey]
             ? currKey
             : prevKey;
-        },
-      );
-      const mostUsedIcon = Object.keys(total.icons).reduce(
-        (prevKey, currKey) => {
-          return total.icons[currKey] > total.icons[prevKey]
-            ? currKey
-            : prevKey;
-        },
+        }
       );
 
       return {
@@ -133,9 +130,9 @@ export const getAverageValues = (currentWeather: any, fiveDaysWeather: any) => {
         pressure: (total.pressureTotal / count).toFixed(),
         humidity: (total.humidityTotal / count).toFixed(),
         description: mostUsedDescription,
-        icon: mostUsedIcon,
+        icon: total.icons[mostUsedDescription] + 'd',
       };
-    },
+    }
   );
 
   fiveDaysForecastDaily.splice(0, 1, current);

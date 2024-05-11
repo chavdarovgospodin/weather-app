@@ -44,7 +44,7 @@ const App = () => {
 
   useEffect(() => {
     if (isLocationLoading) navigate(`/weather-by-days`);
-  }, [isLocationLoading]);
+  }, [isLocationLoading, navigate]);
 
   return (
     <div className="App">

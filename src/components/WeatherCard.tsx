@@ -40,7 +40,6 @@ const WeatherCard = (weatherData: WeatherData) => {
   const navigate = useNavigate();
 
   const handleTitleClick = () => {
-    console.log('here', params);
     !params?.date && navigate(`/weather-by-hours/${date}`);
   };
 

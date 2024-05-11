@@ -1,5 +1,5 @@
 import { Dispatch } from '@reduxjs/toolkit';
-import { getAverageValues, getLocalStorageItem } from '../utils';
+import { tranformWeatherValues, getLocalStorageItem } from '../utils';
 import {
   setLocationError,
   setUserLocation,
@@ -30,10 +30,10 @@ export const fetchWeatherData =
       ];
 
       const [currentWeather, fiveDaysWeather] = await Promise.all(
-        urls.map((url) => fetchData(url)),
+        urls.map((url) => fetchData(url))
       );
 
-      const data = getAverageValues(currentWeather, fiveDaysWeather.list);
+      const data = tranformWeatherValues(currentWeather, fiveDaysWeather.list);
 
       dispatch(setWeatherSuccess(data));
     } catch (error) {
@@ -49,14 +49,14 @@ export const fetchUserLocation = () => (dispatch: any) => {
         setUserLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-        }),
+        })
       );
       dispatch(
-        fetchWeatherData(position.coords.latitude, position.coords.longitude),
+        fetchWeatherData(position.coords.latitude, position.coords.longitude)
       );
     },
     (error) => {
       dispatch(setLocationError(error.message));
-    },
+    }
   );
 };
