@@ -30,7 +30,8 @@ export const weatherSlice = createSlice({
         action.payload.fiveDaysForecastDaily;
       state.weather.fiveDaysForecastHourly =
         action.payload.fiveDaysForecastHourly;
-      (state.isLoading = false), (state.error = null);
+      state.isLoading = false;
+      state.error = null;
     },
     setWeatherError: (state, action) => {
       state.isLoading = false;

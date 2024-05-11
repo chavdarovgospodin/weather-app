@@ -11,7 +11,7 @@ const WeatherByHours = () => {
   } = useSelector((state: any) => state.weather);
 
   const foundDate = fiveDaysForecastHourly?.filter((day: any) =>
-    day.date.includes(date),
+    day.date.includes(date)
   );
 
   return (

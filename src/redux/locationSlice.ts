@@ -24,7 +24,8 @@ export const locationSlice = createSlice({
     setUserLocation: (state, action) => {
       state.latitude = action.payload.latitude;
       state.longitude = action.payload.longitude;
-      (state.isLoading = false), (state.error = null);
+      state.isLoading = false;
+      state.error = null;
     },
     setLocationError: (state, action) => {
       state.error = action.payload;
