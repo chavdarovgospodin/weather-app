@@ -7,7 +7,7 @@ export interface WeatherData {
   description: string;
   feels_like: number;
   humidity: number;
-  icon: string;
+  icon?: string;
   pressure: number;
   temp_max: number;
   temp_min: number;
@@ -16,7 +16,7 @@ export interface WeatherData {
   windSpeed: number;
 }
 
-const WeatherList = ({ weather }: any) => (
+const WeatherList = ({ weather }: { weather: WeatherData[] }) => (
   <Box sx={{ flexGrow: 1 }}>
     <Grid
       container

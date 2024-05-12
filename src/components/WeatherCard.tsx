@@ -50,7 +50,7 @@ const WeatherCard = (weatherData: WeatherData) => {
       direction="row"
       justifyContent="space-between"
       alignItems="stretch"
-      sx={{ cursor: params ? 'pointer' : 'none' }}
+      sx={{ cursor: !params?.date ? 'pointer' : 'default' }}
       item
       md={12}
       onClick={handleTitleClick}
@@ -89,7 +89,7 @@ const WeatherCard = (weatherData: WeatherData) => {
         <CardHeader
           title={headerTitle()}
           sx={{ pb: 0 }}
-          avatar={<ImageList searchString={icon} />}
+          avatar={icon && <ImageList searchString={icon} />}
         />
         <CardContent sx={{ pt: 0 }}>
           <Typography className="Description" color="text.secondary">

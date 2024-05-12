@@ -6,7 +6,7 @@ export interface WeatherState {
     fiveDaysForecastHourly: Array<any>;
   };
   isLoading: boolean;
-  error: any;
+  error: string | null;
 }
 
 const initialState: WeatherState = {

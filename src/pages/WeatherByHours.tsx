@@ -3,15 +3,16 @@ import { Container } from '@mui/material';
 import { WeatherList } from '../components';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { RootState } from '../store';
 
 const WeatherByHours = () => {
-  const { date }: any = useParams();
+  const { date } = useParams();
   const {
     weather: { fiveDaysForecastHourly },
-  } = useSelector((state: any) => state.weather);
+  } = useSelector((state: RootState) => state.weather);
 
-  const foundDate = fiveDaysForecastHourly?.filter((day: any) =>
-    day.date.includes(date)
+  const foundDate = fiveDaysForecastHourly?.filter(
+    (day: { date: string }) => date && day.date.includes(date)
   );
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { LoadingScreen } from './components';
 import { fetchUserLocation, fetchWeatherData } from './redux/actions';
-import { AppDispatch } from './store';
+import { AppDispatch, RootState } from './store';
 import { setLocalStorageItem } from './utils';
 
 const App = () => {
@@ -19,12 +19,12 @@ const App = () => {
     latitude,
     longitude,
     isLoading: isLocationLoading,
-  } = useSelector((state: any) => state.location);
+  } = useSelector((state: RootState) => state.location);
 
   const {
     weather: { fiveDaysForecastDaily },
     isLoading: isWeatherLoading,
-  } = useSelector((state: any) => state.weather);
+  } = useSelector((state: RootState) => state.weather);
 
   const handleSwitch = (event: BaseSyntheticEvent) => {
     const unitsValue = event.target.checked ? 'metric' : 'imperial';

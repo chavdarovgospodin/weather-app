@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface LocationState {
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   isLoading: boolean;
-  error: any;
+  error: string | null;
 }
 
 const initialState: LocationState = {
-  latitude: '',
-  longitude: '',
+  latitude: 0,
+  longitude: 0,
   isLoading: false,
   error: '',
 } as LocationState;

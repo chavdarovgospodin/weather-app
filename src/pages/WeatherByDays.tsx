@@ -2,11 +2,12 @@ import React from 'react';
 import { Container } from '@mui/material';
 import { WeatherList } from '../components';
 import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 const WeatherByDays = () => {
   const {
     weather: { fiveDaysForecastDaily },
-  } = useSelector((state: any) => state.weather);
+  } = useSelector((state: RootState) => state.weather);
 
   return (
     <Container>
