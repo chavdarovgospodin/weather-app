@@ -64,7 +64,7 @@ const WeatherCard = (weatherData: WeatherData) => {
             {formattedDate}
           </Box>
           <Box component="span" className="Header-title-date">
-            {formattedTime}
+          {params?.date && formattedTime}
           </Box>
         </Typography>
       </Grid>
